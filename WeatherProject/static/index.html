@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Погода</title>
+  <link rel="stylesheet" href="/static/style.css">
+  <!-- Chart.js — готовая библиотека для рисования графиков -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+</head>
+<body>
+  <main class="page">
+
+    <!-- Выбор и поиск города -->
+    <section class="city-bar">
+      <div class="city-pick">
+        <label for="city-select">Мои города</label>
+        <div class="city-pick-row">
+          <select id="city-select"></select>
+          <button id="remove-city" class="ghost" title="Убрать город из списка">Убрать</button>
+        </div>
+      </div>
+      <div class="search">
+        <label for="city-search">Добавить город</label>
+        <input id="city-search" type="search" autocomplete="off"
+               placeholder="Название города, например: Париж, Алматы, Токио">
+        <ul id="search-results" class="results" hidden></ul>
+      </div>
+    </section>
+
+    <!-- Карточка с погодой прямо сейчас -->
+    <section class="now">
+      <div class="now-top">
+        <h1 id="city">Погода</h1>
+        <button id="refresh" class="refresh">Обновить сейчас</button>
+      </div>
+      <div class="now-temp" id="temp">—</div>
+      <div class="now-details">
+        <span>Влажность: <b id="humidity">—</b></span>
+        <span>Ветер: <b id="wind">—</b></span>
+      </div>
+      <div class="now-updated" id="updated">Загрузка…</div>
+    </section>
+
+    <!-- График -->
+    <section class="chart-card">
+      <div class="controls">
+        <div class="group" id="metrics">
+          <button data-metric="temperature" class="active">Температура</button>
+          <button data-metric="humidity">Влажность</button>
+          <button data-metric="wind_speed">Ветер</button>
+        </div>
+        <div class="group" id="periods">
+          <button data-hours="6">6 ч</button>
+          <button data-hours="24" class="active">24 ч</button>
+          <button data-hours="72">3 дня</button>
+          <button data-hours="168">Неделя</button>
+        </div>
+      </div>
+      <div class="chart-box">
+        <canvas id="chart"></canvas>
+        <p class="empty" id="empty" hidden>Пока нет данных за этот период.</p>
+      </div>
+      <p class="hint">Время на графике — местное время выбранного города.</p>
+    </section>
+
+  </main>
+  <script src="/static/app.js"></script>
+</body>
+</html>

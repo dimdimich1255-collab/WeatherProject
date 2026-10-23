@@ -1,0 +1,170 @@
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  font-family: "Segoe UI", system-ui, sans-serif;
+  background: #eef2f7;
+  color: #1f2937;
+}
+
+.page {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 24px 16px;
+  display: grid;
+  gap: 20px;
+}
+
+/* Панель выбора города */
+.city-bar {
+  background: #fff;
+  border-radius: 20px;
+  padding: 16px 20px;
+  box-shadow: 0 2px 10px rgba(0,0,0,.05);
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.3fr);
+  gap: 16px;
+}
+@media (max-width: 640px) {
+  .city-bar { grid-template-columns: 1fr; }
+}
+.city-bar label {
+  display: block;
+  font-size: 13px;
+  color: #6b7280;
+  margin-bottom: 6px;
+}
+.city-pick-row { display: flex; gap: 8px; }
+.city-bar select,
+.city-bar input {
+  width: 100%;
+  min-width: 0;
+  border: 1px solid #d1d5db;
+  border-radius: 10px;
+  padding: 9px 12px;
+  font-size: 15px;
+  font-family: inherit;
+  background: #fff;
+  color: #1f2937;
+}
+.city-bar input:focus,
+.city-bar select:focus { outline: 2px solid #93c5fd; border-color: #2563eb; }
+
+.ghost {
+  border: 1px solid #d1d5db;
+  background: #fff;
+  color: #6b7280;
+  border-radius: 10px;
+  padding: 0 12px;
+  cursor: pointer;
+  font-size: 14px;
+  white-space: nowrap;
+}
+.ghost:hover:not(:disabled) { color: #dc2626; border-color: #fca5a5; }
+.ghost:disabled { opacity: .45; cursor: default; }
+
+.search { position: relative; }
+.results {
+  position: absolute;
+  z-index: 10;
+  left: 0;
+  right: 0;
+  top: 100%;
+  margin: 4px 0 0;
+  padding: 4px;
+  list-style: none;
+  background: #fff;
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  box-shadow: 0 8px 24px rgba(0,0,0,.12);
+  max-height: 320px;
+  overflow-y: auto;
+}
+.results[hidden] { display: none; }
+.results button {
+  width: 100%;
+  text-align: left;
+  border: 0;
+  background: none;
+  padding: 8px 10px;
+  border-radius: 8px;
+  cursor: pointer;
+  font: inherit;
+  color: #1f2937;
+}
+.results button:hover { background: #eff6ff; }
+.results small { display: block; color: #6b7280; font-size: 12px; }
+.results .note { padding: 8px 10px; color: #6b7280; font-size: 14px; }
+
+/* Карточка «сейчас» */
+.now {
+  background: linear-gradient(135deg, #2563eb, #7c3aed);
+  color: #fff;
+  border-radius: 20px;
+  padding: 24px 28px;
+}
+.now-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+}
+.now h1 { margin: 0; font-size: 24px; font-weight: 600; }
+.now-temp { font-size: 88px; font-weight: 300; line-height: 1.1; margin: 8px 0; }
+.now-details { display: flex; gap: 24px; font-size: 16px; opacity: .95; }
+.now-updated { margin-top: 12px; font-size: 13px; opacity: .8; }
+
+.refresh {
+  border: 1px solid rgba(255,255,255,.5);
+  background: rgba(255,255,255,.15);
+  color: #fff;
+  padding: 8px 14px;
+  border-radius: 10px;
+  cursor: pointer;
+  font-size: 14px;
+}
+.refresh:hover { background: rgba(255,255,255,.28); }
+.refresh:disabled { opacity: .6; cursor: wait; }
+
+/* Карточка с графиком */
+.chart-card {
+  background: #fff;
+  border-radius: 20px;
+  padding: 20px;
+  box-shadow: 0 2px 10px rgba(0,0,0,.05);
+}
+.controls {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+.group { display: flex; gap: 6px; flex-wrap: wrap; }
+.group button {
+  border: 1px solid #d1d5db;
+  background: #fff;
+  padding: 6px 12px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 14px;
+  color: #374151;
+}
+.group button.active {
+  background: #2563eb;
+  border-color: #2563eb;
+  color: #fff;
+}
+
+.chart-box { position: relative; height: 340px; }
+.empty {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0;
+  color: #6b7280;
+}
+.empty[hidden] { display: none; }
+.hint { margin: 10px 0 0; font-size: 12px; color: #9ca3af; }
